@@ -9,16 +9,19 @@ import java.util.logging.Logger;
 
 public class NotifyUserInteractor implements NotifyUserInputBoundary, Subscriber<EngineMatch> {
     private final LeaderboardRepository leaderboardRepository;
-    private final NotifyUserOutputBoundary notifyUserOutputBoundary;
+    private final NotifyUserOutputBoundary notifyUserPresenter;
 
 
     public NotifyUserInteractor(LeaderboardRepository leaderboardRepository, NotifyUserOutputBoundary notifyUserOutputBoundary) {
         this.leaderboardRepository = leaderboardRepository;
-        this.notifyUserOutputBoundary = notifyUserOutputBoundary;
+        this.notifyUserPresenter = notifyUserOutputBoundary;
     }
 
 
-    //Sends an SMS message to the user informing them of their position on the leaderboard
+    /**
+     * Sends an SMS message to the user informing them of their position on the leaderboard
+     * @param notifyUserInputData
+     */
     @Override
     public void execute(NotifyUserInputData notifyUserInputData) {
         Logger.getLogger("notify_user").info("Sending SMS to the user");
@@ -51,7 +54,7 @@ public class NotifyUserInteractor implements NotifyUserInputBoundary, Subscriber
                     notifyUserInputData.getUsername());
         }
 
-        notifyUserOutputBoundary.notifyUser(notifyUserInputData.getPhoneNumber(), message);
+        notifyUserPresenter.notifyUser(notifyUserInputData.getPhoneNumber(), message);
     }
 
     @Override
