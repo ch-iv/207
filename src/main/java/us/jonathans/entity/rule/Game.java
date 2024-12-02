@@ -4,7 +4,7 @@ package us.jonathans.entity.rule;
 public class Game {
     private final static MancalaSide startingSide = MancalaSide.PLAYER1;
 
-    private final MancalaBoard board = new JonathanMancalaBoard(4);
+    private final MancalaBoard board = new JonathanMancalaBoard(1);
     private final MancalaRuleSet ruleSet = new JonathanMancalaRuleSet();
 
     private MancalaSide currentSide = startingSide;

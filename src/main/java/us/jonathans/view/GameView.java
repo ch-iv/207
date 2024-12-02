@@ -1,5 +1,6 @@
 package us.jonathans.view;
 
+import us.jonathans.interface_adapter.cancel_match.CancelMatchController;
 import us.jonathans.interface_adapter.make_player_move.MakePlayerMoveController;
 import us.jonathans.interface_adapter.make_player_move.MakePlayerMoveViewModel;
 import us.jonathans.interface_adapter.cancel_match.CancelMatchViewModel;
@@ -19,7 +20,8 @@ public class GameView extends JPanel {
             MakePlayerMoveController makePlayerMoveController,
             MakeComputerMoveController makeComputerMoveController,
             MakeComputerMoveViewModel makeComputerMoveViewModel,
-            CancelMatchViewModel cancelMatchViewModel
+            CancelMatchViewModel cancelMatchViewModel,
+            CancelMatchController cancelMatchController
     ) {
         setBorder(BorderFactory.createTitledBorder(viewName));
         setLayout(new GridLayout());
@@ -30,7 +32,8 @@ public class GameView extends JPanel {
                 makePlayerMoveController,
                 makeComputerMoveController,
                 makeComputerMoveViewModel,
-                cancelMatchViewModel
+                cancelMatchViewModel,
+                cancelMatchController
         ));
     }
 }

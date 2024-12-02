@@ -1,6 +1,7 @@
 package us.jonathans.view;
 
 import us.jonathans.app.Config;
+import us.jonathans.entity.match.EngineMatch;
 import us.jonathans.entity.rendering.geometry.Obj2;
 import us.jonathans.entity.rendering.geometry.Vec2;
 import us.jonathans.entity.rendering.geometry.Align;
@@ -11,6 +12,7 @@ import us.jonathans.entity.rendering.sprite.StoneColors;
 import us.jonathans.entity.rule.MancalaBoard;
 import us.jonathans.entity.rule.MancalaHole;
 import us.jonathans.entity.rule.MancalaSide;
+import us.jonathans.interface_adapter.cancel_match.CancelMatchController;
 import us.jonathans.interface_adapter.make_player_move.MakePlayerMoveController;
 import us.jonathans.interface_adapter.make_player_move.MakePlayerMoveState;
 import us.jonathans.interface_adapter.make_player_move.MakePlayerMoveViewModel;
@@ -21,6 +23,8 @@ import us.jonathans.interface_adapter.start_game.StartGameViewModel;
 import us.jonathans.interface_adapter.make_computer_move.MakeComputerMoveController;
 import us.jonathans.interface_adapter.make_computer_move.MakeComputerMoveState;
 import us.jonathans.interface_adapter.make_computer_move.MakeComputerMoveViewModel;
+import us.jonathans.observable.publisher.MatchEndPublisher;
+import us.jonathans.observable.subscriber.Subscriber;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,11 +36,12 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class JMancalaPanel extends JPanel implements MouseMotionListener, PropertyChangeListener {
+public class JMancalaPanel extends JPanel implements MouseMotionListener, PropertyChangeListener, Subscriber<EngineMatch> {
     private final StartGameViewModel startGameViewModel;
     private final MakePlayerMoveViewModel makePlayerMoveViewModel;
     private final MakePlayerMoveController makePlayerMoveController;
     private final CancelMatchViewModel cancelMatchViewModel;
+    private final CancelMatchController cancelMatchController;
     private final String viewName = "mancala_panel";
     private final MakeComputerMoveViewModel makeComputerMoveViewModel;
     private final MakeComputerMoveController makeComputerMoveController;
@@ -57,7 +62,8 @@ public class JMancalaPanel extends JPanel implements MouseMotionListener, Proper
             MakePlayerMoveController makePlayerMoveController,
             MakeComputerMoveController makeComputerMoveController,
             MakeComputerMoveViewModel makeComputerMoveViewModel,
-            CancelMatchViewModel cancelMatchViewModel
+            CancelMatchViewModel cancelMatchViewModel,
+            CancelMatchController cancelMatchController
     ) {
         super();
         this.startGameViewModel = startGameViewModel;
@@ -70,7 +76,9 @@ public class JMancalaPanel extends JPanel implements MouseMotionListener, Proper
         this.makeComputerMoveViewModel.addPropertyChangeListener(this);
         this.cancelMatchViewModel = cancelMatchViewModel;
         this.cancelMatchViewModel.addPropertyChangeListener(this);
+        this.cancelMatchController = cancelMatchController;
         this.parent = frame;
+        MatchEndPublisher.getInstance().subscribe(this);
         this.addMouseMotionListener(this);
         this.setDoubleBuffered(true);
         lastSize = this.getPreferredSize();
@@ -376,4 +384,9 @@ public class JMancalaPanel extends JPanel implements MouseMotionListener, Proper
     }
 
 
+    @Override
+    public void onNext(EngineMatch engineMatch) {
+        System.out.println("Match end jmancalapanel");
+        this.cancelMatchController.execute();
+    }
 }

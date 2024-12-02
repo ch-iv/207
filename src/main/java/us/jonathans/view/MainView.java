@@ -51,7 +51,8 @@ public class MainView extends JPanel {
                 makePlayerMoveController,
                 makeComputerMoveController,
                 makeComputerMoveViewModel,
-                cancelMatchViewModel
+                cancelMatchViewModel,
+                cancelMatchController
         ));
     }
 }
