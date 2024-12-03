@@ -35,7 +35,7 @@ public class LeaderboardClient {
                     .build();
             httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        } catch (IllegalArgumentException _) {
+        } catch (IllegalArgumentException e) {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
