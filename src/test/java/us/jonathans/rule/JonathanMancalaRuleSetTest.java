@@ -44,7 +44,7 @@ class JonathanMancalaRuleSetTest {
 
     @Test
     void makeLegalMovePlayer2() {
-        ruleSet.makeMove(board, MancalaSide.PlAYER2, MancalaHole.a);
+        ruleSet.makeMove(board, MancalaSide.PLAYER2, MancalaHole.a);
         int[] correct = new int[]{
                 4,
                 4,
@@ -72,7 +72,7 @@ class JonathanMancalaRuleSetTest {
         board = new JonathanMancalaBoard(0);
         HashSet<MancalaHole> moves = new HashSet<>();
         assertEquals(moves, ruleSet.getLegalMoves(board, MancalaSide.PLAYER1));
-        assertEquals(moves, ruleSet.getLegalMoves(board, MancalaSide.PlAYER2));
+        assertEquals(moves, ruleSet.getLegalMoves(board, MancalaSide.PLAYER2));
     }
 
     @Test
@@ -82,13 +82,13 @@ class JonathanMancalaRuleSetTest {
             for (MancalaHole hole: ruleSet.getLegalMoves(board, MancalaSide.PLAYER1)) {
                 ruleSet.makeMove(board, MancalaSide.PLAYER1, hole);
             }
-            for (MancalaHole hole: ruleSet.getLegalMoves(board, MancalaSide.PlAYER2)) {
-                ruleSet.makeMove(board, MancalaSide.PlAYER2, hole);
+            for (MancalaHole hole: ruleSet.getLegalMoves(board, MancalaSide.PLAYER2)) {
+                ruleSet.makeMove(board, MancalaSide.PLAYER2, hole);
             }
             if (board.getStones(MancalaHole.g) < board.getStones(MancalaHole.G)) {
                 winner = MancalaSide.PLAYER1;
             } else if (board.getStones(MancalaHole.G) < board.getStones(MancalaHole.g)) {
-                winner = MancalaSide.PlAYER2;
+                winner = MancalaSide.PLAYER2;
             }
         }
         assertEquals(ruleSet.checkWin(board), winner);
@@ -111,8 +111,8 @@ class JonathanMancalaRuleSetTest {
             for (MancalaHole hole: ruleSet.getLegalMoves(board, MancalaSide.PLAYER1)) {
                 ruleSet.makeMove(board, MancalaSide.PLAYER1, hole);
             }
-            for (MancalaHole hole: ruleSet.getLegalMoves(board, MancalaSide.PlAYER2)) {
-                ruleSet.makeMove(board, MancalaSide.PlAYER2, hole);
+            for (MancalaHole hole: ruleSet.getLegalMoves(board, MancalaSide.PLAYER2)) {
+                ruleSet.makeMove(board, MancalaSide.PLAYER2, hole);
             }
         }
         assertEquals(ruleSet.isGameOver(board), true);
@@ -154,7 +154,7 @@ class JonathanMancalaRuleSetTest {
     @Test
     void testMakeMoveLoopOverGoalPlayer2() {
         board.setStones(MancalaHole.f, 8);
-        ruleSet.makeMove(board, MancalaSide.PlAYER2, MancalaHole.f);
+        ruleSet.makeMove(board, MancalaSide.PLAYER2, MancalaHole.f);
         int[] correct = new int[]{
                 5,
                 5,

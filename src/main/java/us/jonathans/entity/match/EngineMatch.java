@@ -8,7 +8,7 @@ public class EngineMatch {
     final UUID playerId;
     final String engineId;
     final Game game = new Game();
-    final MancalaSide engineSide = MancalaSide.PlAYER2;
+    final MancalaSide engineSide = MancalaSide.PLAYER2;
     final MancalaSide playerSide = MancalaSide.PLAYER1;
 
     public EngineMatch(UUID playerId, String engineId) {

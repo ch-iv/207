@@ -4,7 +4,7 @@ public enum MancalaSide {
     PLAYER1{
         @Override
         public MancalaSide opposite() {
-            return PlAYER2;
+            return PLAYER2;
         }
 
         @Override
@@ -25,10 +25,34 @@ public enum MancalaSide {
         }
     },
 
-    PlAYER2{
+    PLAYER2 {
         @Override
         public MancalaSide opposite() {
             return PLAYER1;
+        }
+
+        @Override
+        public MancalaHole getGoal() {
+            return MancalaHole.g;
+        }
+
+        @Override
+        public MancalaHole[] getHoles() {
+            return new MancalaHole[] {
+                    MancalaHole.a,
+                    MancalaHole.b,
+                    MancalaHole.c,
+                    MancalaHole.d,
+                    MancalaHole.e,
+                    MancalaHole.f,
+            };
+        }
+    },
+
+    DRAW {
+        @Override
+        public MancalaSide opposite() {
+            return DRAW;
         }
 
         @Override

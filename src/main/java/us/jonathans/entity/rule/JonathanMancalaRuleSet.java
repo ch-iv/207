@@ -31,7 +31,7 @@ public class JonathanMancalaRuleSet implements MancalaRuleSet {
                     stones--;
                 }
             }
-        } else if (player == MancalaSide.PlAYER2) {
+        } else if (player == MancalaSide.PLAYER2) {
             board.setStones(hole, 0);
             while (stones > 0) {
                 hole = board.getNextHole(hole);
@@ -64,7 +64,7 @@ public class JonathanMancalaRuleSet implements MancalaRuleSet {
         }
 
         if (isGameOver(board)) {
-            for (MancalaSide mancalaSide: new MancalaSide[]{MancalaSide.PLAYER1, MancalaSide.PlAYER2}) {
+            for (MancalaSide mancalaSide: new MancalaSide[]{MancalaSide.PLAYER1, MancalaSide.PLAYER2}) {
                 for (MancalaHole mancalaHole: getHoles(mancalaSide)) {
                     board.setStones(mancalaSide.getGoal(), board.getStones(mancalaSide.getGoal()) + board.getStones(mancalaHole));
                     board.setStones(mancalaHole, 0);
@@ -91,7 +91,7 @@ public class JonathanMancalaRuleSet implements MancalaRuleSet {
                     legalMoves.add(getHoles(player)[i]);
                 }
             }
-        } else if (player == MancalaSide.PlAYER2) {
+        } else if (player == MancalaSide.PLAYER2) {
             for (int i = 0; i < 6; i++) {
                 if (board.getStones(getHoles(player)[i]) > 0) {
                     legalMoves.add(getHoles(player)[i]);
@@ -112,7 +112,7 @@ public class JonathanMancalaRuleSet implements MancalaRuleSet {
                     MancalaHole.F,
             };
             return holes;
-        } else if (player == MancalaSide.PlAYER2) {
+        } else if (player == MancalaSide.PLAYER2) {
             MancalaHole[] holes = {
                     MancalaHole.a,
                     MancalaHole.b,
@@ -133,16 +133,16 @@ public class JonathanMancalaRuleSet implements MancalaRuleSet {
             if (board.getStones(MancalaHole.g) < board.getStones(MancalaHole.G)) {
                 return MancalaSide.PLAYER1;
             } else if (board.getStones(MancalaHole.G) < board.getStones(MancalaHole.g)) {
-                return MancalaSide.PlAYER2;
+                return MancalaSide.PLAYER2;
             }
-            return null;
+            return MancalaSide.DRAW;
         }
         return null;
     }
 
     @Override
     public Boolean isGameOver(MancalaBoard board) {
-        if (getLegalMoves(board, MancalaSide.PLAYER1).isEmpty() || getLegalMoves(board, MancalaSide.PlAYER2).isEmpty()) {
+        if (getLegalMoves(board, MancalaSide.PLAYER1).isEmpty() || getLegalMoves(board, MancalaSide.PLAYER2).isEmpty()) {
             return true;
         }
         return false;

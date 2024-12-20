@@ -57,7 +57,7 @@ class MakePlayerMoveInteractorTest {
         when(matchDataAccessObject.getCurrentMatch()).thenReturn(new EngineMatch(UUID.randomUUID(), "asdf"));
         Game game = matchDataAccessObject.getCurrentMatch().getGame();
         while (!game.isGameOver()) {
-            for (MancalaSide mancalaSide: new MancalaSide[]{MancalaSide.PLAYER1, MancalaSide.PlAYER2}) {
+            for (MancalaSide mancalaSide: new MancalaSide[]{MancalaSide.PLAYER1, MancalaSide.PLAYER2}) {
                 for (MancalaHole hole: mancalaSide.getHoles()) {
                     makePlayerMoveInteractor.execute(
                             new MakePlayerMoveInputData(new MancalaMove(mancalaSide, hole))
