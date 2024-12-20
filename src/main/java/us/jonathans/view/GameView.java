@@ -24,13 +24,7 @@ public class GameView extends JPanel {
         setBorder(BorderFactory.createTitledBorder(viewName));
         setLayout(new GridLayout());
         add(new JMancalaPanel(
-                this,
-                startGameViewModel,
-                makePlayerMoveViewModel,
-                makePlayerMoveController,
-                makeComputerMoveController,
-                makeComputerMoveViewModel,
-                cancelMatchViewModel
+                this
         ));
     }
 }

@@ -69,15 +69,15 @@ public class Game {
         return ruleSet;
     }
 
-    public void setCurrentSide(MancalaSide currentSide) {
+    private void setCurrentSide(MancalaSide currentSide) {
         this.currentSide = currentSide;
     }
 
-    public void setWinner(MancalaSide winner) {
+    private void setWinner(MancalaSide winner) {
         this.winner = winner;
     }
 
-    public void setLoser(MancalaSide loser) {
+    private void setLoser(MancalaSide loser) {
         this.loser = loser;
     }
 }
